@@ -1,62 +1,139 @@
-import { DemoResponse } from "@shared/api";
 import { useEffect, useState } from "react";
+import { DemoResponse } from "@shared/api";
+import { Button } from "@/components/ui/button";
+import { ShieldCheck, QrCode, Fingerprint, FileText, BrainCircuit, Network, BadgeCheck } from "lucide-react";
+import UploadBox from "@/components/UploadBox";
 
 export default function Index() {
   const [exampleFromServer, setExampleFromServer] = useState("");
-  // Fetch users on component mount
   useEffect(() => {
     fetchDemo();
   }, []);
-
-  // Example of how to fetch data from the server (if needed)
   const fetchDemo = async () => {
     try {
       const response = await fetch("/api/demo");
       const data = (await response.json()) as DemoResponse;
       setExampleFromServer(data.message);
     } catch (error) {
-      console.error("Error fetching hello:", error);
+      // ignore in UI; server optional
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-      <div className="text-center">
-        {/* TODO: FUSION_GENERATION_APP_PLACEHOLDER replace everything here with the actual app! */}
-        <h1 className="text-2xl font-semibold text-slate-800 flex items-center justify-center gap-3">
-          <svg
-            className="animate-spin h-8 w-8 text-slate-400"
-            viewBox="0 0 50 50"
-          >
-            <circle
-              className="opacity-30"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-            />
-            <circle
-              className="text-slate-600"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-              strokeDasharray="100"
-              strokeDashoffset="75"
-            />
-          </svg>
-          Generating your app...
-        </h1>
-        <p className="mt-4 text-slate-600 max-w-md">
-          Watch the chat on the left for updates that might need your attention
-          to finish generating
-        </p>
-        <p className="mt-4 hidden max-w-md">{exampleFromServer}</p>
+    <main>
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(600px_circle_at_20%_20%,hsl(var(--ring)/.12),transparent_40%),radial-gradient(500px_circle_at_80%_10%,hsl(var(--primary)/.12),transparent_40%)]" />
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div className="space-y-6">
+              <span className="inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">Public credential verification for Jharkhand</span>
+              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
+                Detect fake certificates with AI, OCR and cryptography
+              </h1>
+              <p className="text-muted-foreground text-lg max-w-xl">
+                Upload degrees or mark-sheets for instant validation. We analyze QR codes, signatures, and immutable hashes, and cross-check with institutional registries.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Button size="lg" className="gap-2" asChild>
+                  <a href="/verify">
+                    <ShieldCheck className="h-5 w-5" /> Verify a certificate
+                  </a>
+                </Button>
+                <Button variant="secondary" size="lg" asChild>
+                  <a href="#how-it-works">How it works</a>
+                </Button>
+              </div>
+              <div className="flex items-center gap-6 pt-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-emerald-600" /> Employers</div>
+                <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-emerald-600" /> Admissions</div>
+                <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-emerald-600" /> Govt agencies</div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute -inset-4 -z-10 rounded-2xl bg-gradient-to-br from-primary/20 to-emerald-500/20 blur-2xl" />
+              <UploadBox />
+              <p className="sr-only">{exampleFromServer}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section id="how-it-works" className="container mx-auto px-4 py-16 md:py-24">
+        <div className="text-center space-y-3 mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">How it works</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Modern verification pipeline handles both legacy paper certificates and new ERP-generated credentials.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          <Step icon={<FileText className="h-6 w-6" />} title="Upload">
+            PDF or image. We compute a SHA-256 hash and extract basic metadata.
+          </Step>
+          <Step icon={<QrCode className="h-6 w-6" />} title="Analyze">
+            AI/OCR reads fields, decodes QR, and detects tampering or cloning.
+          </Step>
+          <Step icon={<Fingerprint className="h-6 w-6" />} title="Verify">
+            Cross-check with institutional registries and cryptographic signatures.
+          </Step>
+        </div>
+      </section>
+
+      {/* Detection capabilities */}
+      <section className="container mx-auto px-4 pb-24">
+        <div className="rounded-2xl border bg-card p-8 md:p-12">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4">
+              <h3 className="text-2xl font-semibold">Detect anomalies automatically</h3>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                <Feature>Forged seals or signatures</Feature>
+                <Feature>Tampered grades or photos</Feature>
+                <Feature>Invalid certificate numbers</Feature>
+                <Feature>Non-existent institutions or courses</Feature>
+                <Feature>Duplicate or cloned documents</Feature>
+                <Feature>Legacy + ERP compatibility</Feature>
+              </ul>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <Stat icon={<BrainCircuit className="h-5 w-5" />} label="AI + OCR" value="Smart extraction" />
+              <Stat icon={<QrCode className="h-5 w-5" />} label="QR decoding" value="Instant reads" />
+              <Stat icon={<ShieldCheck className="h-5 w-5" />} label="Crypto hashes" value="Tamper-evident" />
+              <Stat icon={<Network className="h-5 w-5" />} label="Registries" value="Institution-backed" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function Step({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl border p-6 bg-card">
+      <div className="h-10 w-10 rounded-md bg-gradient-to-br from-primary to-emerald-500 text-primary-foreground flex items-center justify-center mb-4">
+        {icon}
       </div>
+      <h4 className="font-semibold mb-1">{title}</h4>
+      <p className="text-sm text-muted-foreground">{children}</p>
+    </div>
+  );
+}
+
+function Feature({ children }: { children: React.ReactNode }) {
+  return (
+    <li className="flex items-center gap-2 rounded-md border p-3">
+      <ShieldCheck className="h-4 w-4 text-emerald-600" />
+      <span>{children}</span>
+    </li>
+  );
+}
+
+function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+  return (
+    <div className="rounded-xl border p-5 bg-muted/20">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">{icon} {label}</div>
+      <div className="text-lg font-semibold">{value}</div>
     </div>
   );
 }
