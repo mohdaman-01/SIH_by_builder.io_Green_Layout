@@ -27,9 +27,9 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <a href="#how-it-works" className="hover:underline">
+              <Link to="/#how-it-works" className="hover:underline">
                 How it works
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
