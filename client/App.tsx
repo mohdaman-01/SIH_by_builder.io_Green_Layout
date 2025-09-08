@@ -9,8 +9,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Verify from "./pages/Verify";
+import SignIn from "./pages/SignIn";
+import Admin from "./pages/Admin";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -19,16 +23,27 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/verify" element={<Verify />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/verify" element={<Verify />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute role="admin">
+                  <Admin />
+                </ProtectedRoute>
+              }
+            />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
