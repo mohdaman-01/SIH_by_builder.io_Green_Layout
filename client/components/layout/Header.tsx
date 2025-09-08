@@ -46,7 +46,7 @@ export default function Header() {
 
           <div className="hidden md:flex items-center gap-2">
             <Button asChild variant="secondary" size="sm">
-              <a href="#how-it-works">How it works</a>
+              <Link to="/#how-it-works">How it works</Link>
             </Button>
             <Button
               asChild
