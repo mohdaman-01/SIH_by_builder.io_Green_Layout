@@ -76,8 +76,8 @@ export default function UploadBox() {
           onDragLeave={() => setDragging(false)}
           onDrop={onDrop}
           className={cn(
-            "relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 text-center",
-            dragging ? "border-emerald-500 bg-emerald-500/5" : "border-border",
+            "relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 text-center transition-colors",
+            dragging ? "border-emerald-500 bg-emerald-500/5 ring-4 ring-emerald-500/10" : "border-border",
           )}
         >
           <input
