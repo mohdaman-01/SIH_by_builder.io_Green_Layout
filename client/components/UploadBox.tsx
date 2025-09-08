@@ -1,8 +1,25 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { AlertCircle, CheckCircle2, FileUp, Hash, Image as ImageIcon, QrCode, Replace, ShieldAlert, ShieldCheck, Upload } from "lucide-react";
+import {
+  AlertCircle,
+  CheckCircle2,
+  FileUp,
+  Hash,
+  Image as ImageIcon,
+  QrCode,
+  Replace,
+  ShieldAlert,
+  ShieldCheck,
+  Upload,
+} from "lucide-react";
 import { analyzeFile, type VerificationResult } from "@/lib/verify";
 
 export default function UploadBox() {
@@ -30,7 +47,12 @@ export default function UploadBox() {
       setResult({
         status: "invalid",
         issues: ["Unexpected error analyzing file"],
-        metadata: { fileName: f.name, size: f.size, mime: f.type || "", hashHex: "" },
+        metadata: {
+          fileName: f.name,
+          size: f.size,
+          mime: f.type || "",
+          hashHex: "",
+        },
       });
     } finally {
       setLoading(false);
@@ -63,7 +85,10 @@ export default function UploadBox() {
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle>Verify a certificate</CardTitle>
-          <CardDescription>Upload a PDF or image. We compute hashes, check QR codes, and cross-check with registries.</CardDescription>
+          <CardDescription>
+            Upload a PDF or image. We compute hashes, check QR codes, and
+            cross-check with registries.
+          </CardDescription>
         </div>
         <div>{statusChip}</div>
       </CardHeader>
@@ -77,7 +102,9 @@ export default function UploadBox() {
           onDrop={onDrop}
           className={cn(
             "relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 text-center transition-colors",
-            dragging ? "border-emerald-500 bg-emerald-500/5 ring-4 ring-emerald-500/10" : "border-border",
+            dragging
+              ? "border-emerald-500 bg-emerald-500/5 ring-4 ring-emerald-500/10"
+              : "border-border",
           )}
         >
           <input
@@ -101,7 +128,9 @@ export default function UploadBox() {
             <Button onClick={() => inputRef.current?.click()} className="gap-2">
               <Upload className="h-4 w-4" /> Choose file
             </Button>
-            <p className="text-xs text-muted-foreground">PDF, JPG, PNG up to 10MB</p>
+            <p className="text-xs text-muted-foreground">
+              PDF, JPG, PNG up to 10MB
+            </p>
           </div>
         </div>
 
@@ -110,11 +139,30 @@ export default function UploadBox() {
             <div className="space-y-3">
               <h4 className="text-sm font-medium">File details</h4>
               <ul className="text-sm grid gap-2">
-                <li className="flex items-center gap-2"><Hash className="h-4 w-4 text-muted-foreground" /> Hash: <span className="font-mono break-all">{result?.metadata.hashHex || ""}</span></li>
-                <li className="flex items-center gap-2"><Replace className="h-4 w-4 text-muted-foreground" /> Size: {Math.round(file.size / 1024)} KB</li>
-                <li className="flex items-center gap-2"><ImageIcon className="h-4 w-4 text-muted-foreground" /> Type: {file.type || "Unknown"}</li>
+                <li className="flex items-center gap-2">
+                  <Hash className="h-4 w-4 text-muted-foreground" /> Hash:{" "}
+                  <span className="font-mono break-all">
+                    {result?.metadata.hashHex || ""}
+                  </span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Replace className="h-4 w-4 text-muted-foreground" /> Size:{" "}
+                  {Math.round(file.size / 1024)} KB
+                </li>
+                <li className="flex items-center gap-2">
+                  <ImageIcon className="h-4 w-4 text-muted-foreground" /> Type:{" "}
+                  {file.type || "Unknown"}
+                </li>
                 {result?.metadata.qrData && (
-                  <li className="flex items-center gap-2"><QrCode className="h-4 w-4 text-muted-foreground" /> QR: <span className="truncate max-w-[260px]" title={result.metadata.qrData}>{result.metadata.qrData}</span></li>
+                  <li className="flex items-center gap-2">
+                    <QrCode className="h-4 w-4 text-muted-foreground" /> QR:{" "}
+                    <span
+                      className="truncate max-w-[260px]"
+                      title={result.metadata.qrData}
+                    >
+                      {result.metadata.qrData}
+                    </span>
+                  </li>
                 )}
               </ul>
             </div>
@@ -122,22 +170,45 @@ export default function UploadBox() {
             <div className="space-y-3">
               <h4 className="text-sm font-medium">Verification</h4>
               {!loading && result && (
-                <div className={cn(
-                  "rounded-lg border p-4 text-sm transition-colors",
-                  result.status === "valid" && "border-emerald-500/40 bg-emerald-500/5",
-                  result.status === "suspect" && "border-amber-500/40 bg-amber-500/5",
-                  result.status === "invalid" && "border-red-500/40 bg-red-500/5",
-                )}>
+                <div
+                  className={cn(
+                    "rounded-lg border p-4 text-sm transition-colors",
+                    result.status === "valid" &&
+                      "border-emerald-500/40 bg-emerald-500/5",
+                    result.status === "suspect" &&
+                      "border-amber-500/40 bg-amber-500/5",
+                    result.status === "invalid" &&
+                      "border-red-500/40 bg-red-500/5",
+                  )}
+                >
                   <div className="flex items-center gap-2 mb-2">
-                    {result.status === "valid" && <ShieldCheck className="h-4 w-4 text-emerald-600 animate-float" />}
-                    {result.status === "suspect" && <ShieldAlert className="h-4 w-4 text-amber-600 animate-float" />}
-                    {result.status === "invalid" && <AlertCircle className="h-4 w-4 text-red-600 animate-float" />}
-                    <span className="font-medium capitalize">{result.status}</span>
+                    {result.status === "valid" && (
+                      <ShieldCheck className="h-4 w-4 text-emerald-600 animate-float" />
+                    )}
+                    {result.status === "suspect" && (
+                      <ShieldAlert className="h-4 w-4 text-amber-600 animate-float" />
+                    )}
+                    {result.status === "invalid" && (
+                      <AlertCircle className="h-4 w-4 text-red-600 animate-float" />
+                    )}
+                    <span className="font-medium capitalize">
+                      {result.status}
+                    </span>
                   </div>
                   {result.matchedRecord ? (
-                    <p>Matched registry record for <span className="font-medium">{result.matchedRecord.name}</span> at {result.matchedRecord.institution} ({result.matchedRecord.year}).</p>
+                    <p>
+                      Matched registry record for{" "}
+                      <span className="font-medium">
+                        {result.matchedRecord.name}
+                      </span>{" "}
+                      at {result.matchedRecord.institution} (
+                      {result.matchedRecord.year}).
+                    </p>
                   ) : (
-                    <p>No exact registry match. We checked hash, QR code, and basic metadata.</p>
+                    <p>
+                      No exact registry match. We checked hash, QR code, and
+                      basic metadata.
+                    </p>
                   )}
                   {result.issues.length > 0 && (
                     <ul className="mt-2 list-disc pl-4">
@@ -150,9 +221,24 @@ export default function UploadBox() {
               )}
               {loading && (
                 <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-                  <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                  <svg
+                    className="h-4 w-4 animate-spin"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    />
                   </svg>
                   Analyzing…
                 </div>

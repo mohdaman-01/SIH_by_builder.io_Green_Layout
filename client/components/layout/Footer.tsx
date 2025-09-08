@@ -13,28 +13,48 @@ export default function Footer() {
             <span className="font-semibold">Jharkhand Credential Trust</span>
           </div>
           <p className="text-sm text-muted-foreground max-w-sm">
-            Public platform for authenticating degrees and certificates across Jharkhand using AI, OCR and cryptographic verification.
+            Public platform for authenticating degrees and certificates across
+            Jharkhand using AI, OCR and cryptographic verification.
           </p>
         </div>
 
         <div>
           <h3 className="text-sm font-semibold mb-3">Platform</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/verify" className="hover:underline">Verify a certificate</Link></li>
-            <li><a href="#how-it-works" className="hover:underline">How it works</a></li>
+            <li>
+              <Link to="/verify" className="hover:underline">
+                Verify a certificate
+              </Link>
+            </li>
+            <li>
+              <a href="#how-it-works" className="hover:underline">
+                How it works
+              </a>
+            </li>
           </ul>
         </div>
 
         <div>
           <h3 className="text-sm font-semibold mb-3">Contact</h3>
           <ul className="space-y-2 text-sm">
-            <li className="flex items-center gap-2"><Mail className="h-4 w-4" /><a href="mailto:support@example.com" className="hover:underline">support@example.com</a></li>
-            <li className="flex items-center gap-2"><Github className="h-4 w-4" /><a href="#" className="hover:underline">Contribute</a></li>
+            <li className="flex items-center gap-2">
+              <Mail className="h-4 w-4" />
+              <a href="mailto:support@example.com" className="hover:underline">
+                support@example.com
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Github className="h-4 w-4" />
+              <a href="#" className="hover:underline">
+                Contribute
+              </a>
+            </li>
           </ul>
         </div>
       </div>
       <div className="border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Jharkhand Credential Trust. All rights reserved.
+        © {new Date().getFullYear()} Jharkhand Credential Trust. All rights
+        reserved.
       </div>
     </footer>
   );

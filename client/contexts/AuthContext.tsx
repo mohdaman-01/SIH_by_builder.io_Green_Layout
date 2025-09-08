@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 export type Role = "user" | "admin";
 export type AuthUser = {
@@ -46,7 +52,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem("auth:user");
   };
 
-  const value = useMemo(() => ({ user, loading, signInWithGoogle, signOut }), [user, loading]);
+  const value = useMemo(
+    () => ({ user, loading, signInWithGoogle, signOut }),
+    [user, loading],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

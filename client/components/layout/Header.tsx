@@ -22,7 +22,9 @@ export default function Header() {
             <div className="relative h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
               <ShieldCheck className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="text-lg font-semibold tracking-tight">Jharkhand Credential Trust</span>
+            <span className="text-lg font-semibold tracking-tight">
+              Jharkhand Credential Trust
+            </span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
@@ -46,7 +48,11 @@ export default function Header() {
             <Button asChild variant="secondary" size="sm">
               <a href="#how-it-works">How it works</a>
             </Button>
-            <Button asChild size="sm" className="gap-2 shadow-sm hover:shadow-emerald-500/20 hover:shadow-lg">
+            <Button
+              asChild
+              size="sm"
+              className="gap-2 shadow-sm hover:shadow-emerald-500/20 hover:shadow-lg"
+            >
               <Link to="/verify">
                 <ScanSearch className="h-4 w-4" />
                 Verify now
@@ -73,7 +79,9 @@ export default function Header() {
                   to={n.to}
                   className={cn(
                     "rounded-md px-3 py-2",
-                    pathname === n.to ? "bg-accent text-accent-foreground" : "hover:bg-accent/50",
+                    pathname === n.to
+                      ? "bg-accent text-accent-foreground"
+                      : "hover:bg-accent/50",
                   )}
                   onClick={() => setOpen(false)}
                 >
@@ -96,17 +104,37 @@ export default function Header() {
   );
 }
 
-function AuthButtons({ mobile, onClickItem }: { mobile?: boolean; onClickItem?: () => void }) {
+function AuthButtons({
+  mobile,
+  onClickItem,
+}: {
+  mobile?: boolean;
+  onClickItem?: () => void;
+}) {
   const { user, signOut } = useAuth();
   if (user) {
     return (
-      <div className={cn("flex items-center gap-2", mobile && "flex-col items-stretch") }>
+      <div
+        className={cn(
+          "flex items-center gap-2",
+          mobile && "flex-col items-stretch",
+        )}
+      >
         {user.role === "admin" && (
           <Button asChild variant="outline" size="sm" onClick={onClickItem}>
             <Link to="/admin">Admin panel</Link>
           </Button>
         )}
-        <Button size="sm" variant="ghost" onClick={() => { void signOut(); onClickItem?.(); }}>Sign out</Button>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={() => {
+            void signOut();
+            onClickItem?.();
+          }}
+        >
+          Sign out
+        </Button>
       </div>
     );
   }

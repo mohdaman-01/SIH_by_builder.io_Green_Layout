@@ -13,18 +13,31 @@ export default function SignIn() {
             <ShieldCheck className="h-6 w-6" />
           </div>
           <h1 className="text-2xl font-bold mb-2">Sign in</h1>
-          <p className="text-sm text-muted-foreground mb-6">Continue with Google to verify certificates or manage the registry.</p>
+          <p className="text-sm text-muted-foreground mb-6">
+            Continue with Google to verify certificates or manage the registry.
+          </p>
 
           <div className="grid gap-3">
-            <Button onClick={() => signInWithGoogle("user")} className="w-full gap-2">
+            <Button
+              onClick={() => signInWithGoogle("user")}
+              className="w-full gap-2"
+            >
               <LogIn className="h-4 w-4" /> Continue with Google
             </Button>
-            <Button onClick={() => signInWithGoogle("admin")} variant="secondary" className="w-full gap-2">
-              <UserCog className="h-4 w-4" /> Continue with Google as Admin (demo)
+            <Button
+              onClick={() => signInWithGoogle("admin")}
+              variant="secondary"
+              className="w-full gap-2"
+            >
+              <UserCog className="h-4 w-4" /> Continue with Google as Admin
+              (demo)
             </Button>
           </div>
 
-          <p className="mt-4 text-xs text-muted-foreground">Roles: user can verify documents; admin can upload datasets and register cryptographic data for validation.</p>
+          <p className="mt-4 text-xs text-muted-foreground">
+            Roles: user can verify documents; admin can upload datasets and
+            register cryptographic data for validation.
+          </p>
         </div>
       </div>
     </main>

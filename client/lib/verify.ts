@@ -25,8 +25,7 @@ export type VerificationResult = {
 const MOCK_REGISTRY: RegistryRecord[] = [
   {
     certificateNumber: "JH-NU-2019-000123",
-    hashHex:
-      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", // sha256("") empty file for demo
+    hashHex: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", // sha256("") empty file for demo
     name: "Aarav Kumar",
     institution: "Nilamber-Pitamber University",
     course: "B.Sc",
@@ -34,8 +33,7 @@ const MOCK_REGISTRY: RegistryRecord[] = [
   },
   {
     certificateNumber: "JH-RU-2021-004567",
-    hashHex:
-      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", // unmatched sample
+    hashHex: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", // unmatched sample
     name: "Ishita Singh",
     institution: "Ranchi University",
     course: "B.Tech",
@@ -44,8 +42,7 @@ const MOCK_REGISTRY: RegistryRecord[] = [
   // Duplicate number scenario with different hash to simulate cloning
   {
     certificateNumber: "JH-RU-2021-004567",
-    hashHex:
-      "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    hashHex: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
     name: "Ishita Singh",
     institution: "Ranchi University",
     course: "B.Tech",
@@ -80,7 +77,9 @@ export async function analyzeFile(file: File): Promise<VerificationResult> {
 
   // Try to infer certificate number from filename or QR
   const fromName = extractCertificateNumber(file.name);
-  const fromQr = base.metadata.qrData ? extractCertificateNumber(base.metadata.qrData) : null;
+  const fromQr = base.metadata.qrData
+    ? extractCertificateNumber(base.metadata.qrData)
+    : null;
   const certificateNumber = fromQr || fromName;
 
   // Cross-verify against registry
@@ -99,14 +98,20 @@ export async function analyzeFile(file: File): Promise<VerificationResult> {
   } else if (numberMatches.length > 0) {
     matchedRecord = numberMatches[0];
     status = "suspect";
-    issues.push("Certificate number found but file hash does not match registry record");
+    issues.push(
+      "Certificate number found but file hash does not match registry record",
+    );
     if (numberMatches.length > 1) {
-      issues.push("Duplicate certificate number detected in registry (possible clone)");
+      issues.push(
+        "Duplicate certificate number detected in registry (possible clone)",
+      );
     }
   } else {
     // No match at all
     status = "suspect";
-    issues.push("No registry match. Please contact issuing institution for manual validation");
+    issues.push(
+      "No registry match. Please contact issuing institution for manual validation",
+    );
   }
 
   // Heuristics: basic mime check
@@ -129,7 +134,9 @@ export async function sha256Hex(buf: ArrayBuffer) {
     .join("");
 }
 
-function extractCertificateNumber(input: string | null | undefined): string | null {
+function extractCertificateNumber(
+  input: string | null | undefined,
+): string | null {
   if (!input) return null;
   // Very loose pattern like JH-XX-YYYY-NNNNNN
   const m = input.match(/JH-[A-Z]{2}-\d{4}-\d{6,}/i);

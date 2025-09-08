@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import { DemoResponse } from "@shared/api";
 import { Button } from "@/components/ui/button";
-import { ShieldCheck, QrCode, Fingerprint, FileText, BrainCircuit, Network, BadgeCheck } from "lucide-react";
+import {
+  ShieldCheck,
+  QrCode,
+  Fingerprint,
+  FileText,
+  BrainCircuit,
+  Network,
+  BadgeCheck,
+} from "lucide-react";
 import UploadBox from "@/components/UploadBox";
 import Reveal from "@/components/anim/Reveal";
 
@@ -29,12 +37,16 @@ export default function Index() {
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <Reveal className="space-y-6">
-              <span className="inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">Public credential verification for Jharkhand</span>
+              <span className="inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+                Public credential verification for Jharkhand
+              </span>
               <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
                 Detect fake certificates with AI, OCR and cryptography
               </h1>
               <p className="text-muted-foreground text-lg max-w-xl">
-                Upload degrees or mark-sheets for instant validation. We analyze QR codes, signatures, and immutable hashes, and cross-check with institutional registries.
+                Upload degrees or mark-sheets for instant validation. We analyze
+                QR codes, signatures, and immutable hashes, and cross-check with
+                institutional registries.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Button size="lg" className="gap-2" asChild>
@@ -47,9 +59,16 @@ export default function Index() {
                 </Button>
               </div>
               <div className="flex items-center gap-6 pt-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-emerald-600" /> Employers</div>
-                <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-emerald-600" /> Admissions</div>
-                <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-emerald-600" /> Govt agencies</div>
+                <div className="flex items-center gap-2">
+                  <BadgeCheck className="h-4 w-4 text-emerald-600" /> Employers
+                </div>
+                <div className="flex items-center gap-2">
+                  <BadgeCheck className="h-4 w-4 text-emerald-600" /> Admissions
+                </div>
+                <div className="flex items-center gap-2">
+                  <BadgeCheck className="h-4 w-4 text-emerald-600" /> Govt
+                  agencies
+                </div>
               </div>
             </Reveal>
             <Reveal delay={0.1} className="relative">
@@ -62,17 +81,37 @@ export default function Index() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="container mx-auto px-4 py-16 md:py-24">
+      <section
+        id="how-it-works"
+        className="container mx-auto px-4 py-16 md:py-24"
+      >
         <Reveal className="text-center space-y-3 mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">How it works</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+            How it works
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Modern verification pipeline handles both legacy paper certificates and new ERP-generated credentials.
+            Modern verification pipeline handles both legacy paper certificates
+            and new ERP-generated credentials.
           </p>
         </Reveal>
         <div className="grid md:grid-cols-3 gap-6">
-          <Reveal><Step icon={<FileText className="h-6 w-6" />} title="Upload">PDF or image. We compute a SHA-256 hash and extract basic metadata.</Step></Reveal>
-          <Reveal delay={0.05}><Step icon={<QrCode className="h-6 w-6" />} title="Analyze">AI/OCR reads fields, decodes QR, and detects tampering or cloning.</Step></Reveal>
-          <Reveal delay={0.1}><Step icon={<Fingerprint className="h-6 w-6" />} title="Verify">Cross-check with institutional registries and cryptographic signatures.</Step></Reveal>
+          <Reveal>
+            <Step icon={<FileText className="h-6 w-6" />} title="Upload">
+              PDF or image. We compute a SHA-256 hash and extract basic
+              metadata.
+            </Step>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <Step icon={<QrCode className="h-6 w-6" />} title="Analyze">
+              AI/OCR reads fields, decodes QR, and detects tampering or cloning.
+            </Step>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <Step icon={<Fingerprint className="h-6 w-6" />} title="Verify">
+              Cross-check with institutional registries and cryptographic
+              signatures.
+            </Step>
+          </Reveal>
         </div>
       </section>
 
@@ -81,7 +120,9 @@ export default function Index() {
         <div className="rounded-2xl border bg-card p-8 md:p-12">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <Reveal className="space-y-4">
-              <h3 className="text-2xl font-semibold">Detect anomalies automatically</h3>
+              <h3 className="text-2xl font-semibold">
+                Detect anomalies automatically
+              </h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <Feature>Forged seals or signatures</Feature>
                 <Feature>Tampered grades or photos</Feature>
@@ -92,10 +133,26 @@ export default function Index() {
               </ul>
             </Reveal>
             <Reveal delay={0.1} className="grid grid-cols-2 gap-4">
-              <Stat icon={<BrainCircuit className="h-5 w-5" />} label="AI + OCR" value="Smart extraction" />
-              <Stat icon={<QrCode className="h-5 w-5" />} label="QR decoding" value="Instant reads" />
-              <Stat icon={<ShieldCheck className="h-5 w-5" />} label="Crypto hashes" value="Tamper-evident" />
-              <Stat icon={<Network className="h-5 w-5" />} label="Registries" value="Institution-backed" />
+              <Stat
+                icon={<BrainCircuit className="h-5 w-5" />}
+                label="AI + OCR"
+                value="Smart extraction"
+              />
+              <Stat
+                icon={<QrCode className="h-5 w-5" />}
+                label="QR decoding"
+                value="Instant reads"
+              />
+              <Stat
+                icon={<ShieldCheck className="h-5 w-5" />}
+                label="Crypto hashes"
+                value="Tamper-evident"
+              />
+              <Stat
+                icon={<Network className="h-5 w-5" />}
+                label="Registries"
+                value="Institution-backed"
+              />
             </Reveal>
           </div>
         </div>
@@ -104,7 +161,15 @@ export default function Index() {
   );
 }
 
-function Step({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
+function Step({
+  icon,
+  title,
+  children,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="rounded-xl border p-6 bg-card">
       <div className="h-10 w-10 rounded-md bg-gradient-to-br from-primary to-emerald-500 text-primary-foreground flex items-center justify-center mb-4">
@@ -125,10 +190,20 @@ function Feature({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+function Stat({
+  icon,
+  label,
+  value,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+}) {
   return (
     <div className="rounded-xl border p-5 bg-muted/20">
-      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">{icon} {label}</div>
+      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+        {icon} {label}
+      </div>
       <div className="text-lg font-semibold">{value}</div>
     </div>
   );

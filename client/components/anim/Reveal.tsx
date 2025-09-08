@@ -8,7 +8,12 @@ type Props = {
   className?: string;
 };
 
-export default function Reveal({ children, delay = 0, y = 20, className }: Props) {
+export default function Reveal({
+  children,
+  delay = 0,
+  y = 20,
+  className,
+}: Props) {
   const prefersReducedMotion = useReducedMotion();
   if (prefersReducedMotion) return <div className={className}>{children}</div>;
   return (
