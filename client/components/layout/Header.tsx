@@ -45,7 +45,7 @@ export default function Header() {
             <Button asChild variant="secondary" size="sm">
               <a href="#how-it-works">How it works</a>
             </Button>
-            <Button asChild size="sm" className="gap-2">
+            <Button asChild size="sm" className="gap-2 shadow-sm hover:shadow-emerald-500/20 hover:shadow-lg">
               <Link to="/verify">
                 <ScanSearch className="h-4 w-4" />
                 Verify now
