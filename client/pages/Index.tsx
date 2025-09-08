@@ -3,6 +3,7 @@ import { DemoResponse } from "@shared/api";
 import { Button } from "@/components/ui/button";
 import { ShieldCheck, QrCode, Fingerprint, FileText, BrainCircuit, Network, BadgeCheck } from "lucide-react";
 import UploadBox from "@/components/UploadBox";
+import Reveal from "@/components/anim/Reveal";
 
 export default function Index() {
   const [exampleFromServer, setExampleFromServer] = useState("");
