@@ -85,10 +85,34 @@ export default function Header() {
                   <ScanSearch className="h-4 w-4" /> Verify now
                 </Link>
               </Button>
+              <div className="pt-2">
+                <AuthButtons mobile onClickItem={() => setOpen(false)} />
+              </div>
             </div>
           </div>
         )}
       </div>
     </header>
+  );
+}
+
+function AuthButtons({ mobile, onClickItem }: { mobile?: boolean; onClickItem?: () => void }) {
+  const { user, signOut } = useAuth();
+  if (user) {
+    return (
+      <div className={cn("flex items-center gap-2", mobile && "flex-col items-stretch") }>
+        {user.role === "admin" && (
+          <Button asChild variant="outline" size="sm" onClick={onClickItem}>
+            <Link to="/admin">Admin panel</Link>
+          </Button>
+        )}
+        <Button size="sm" variant="ghost" onClick={() => { void signOut(); onClickItem?.(); }}>Sign out</Button>
+      </div>
+    );
+  }
+  return (
+    <Button asChild size="sm" variant="outline" onClick={onClickItem}>
+      <Link to="/sign-in">Sign in</Link>
+    </Button>
   );
 }
