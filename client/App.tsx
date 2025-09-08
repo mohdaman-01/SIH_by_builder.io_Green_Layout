@@ -42,6 +42,8 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
+          {/* Ensure hash links like /#how-it-works scroll correctly */}
+          <ScrollToHash />
         </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
