@@ -15,6 +15,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { AuthProvider } from "@/contexts/AuthContext";
+import ScrollToHash from "@/components/ScrollToHash";
 
 const queryClient = new QueryClient();
 
