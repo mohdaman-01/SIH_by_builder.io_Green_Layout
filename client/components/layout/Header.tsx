@@ -51,6 +51,7 @@ export default function Header() {
                 Verify now
               </Link>
             </Button>
+            <AuthButtons />
           </div>
 
           <button
