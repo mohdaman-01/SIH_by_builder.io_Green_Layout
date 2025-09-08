@@ -6,15 +6,15 @@ export default function ScrollToHash() {
 
   useEffect(() => {
     if (hash) {
-      const id = hash.replace('#', '');
+      const id = hash.replace("#", "");
       const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
         // try again on next frame after route renders
         requestAnimationFrame(() => {
           const el2 = document.getElementById(id);
-          if (el2) el2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (el2) el2.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       }
     }
