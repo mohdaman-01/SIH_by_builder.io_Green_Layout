@@ -123,15 +123,15 @@ export default function UploadBox() {
               <h4 className="text-sm font-medium">Verification</h4>
               {!loading && result && (
                 <div className={cn(
-                  "rounded-lg border p-4 text-sm",
+                  "rounded-lg border p-4 text-sm transition-colors",
                   result.status === "valid" && "border-emerald-500/40 bg-emerald-500/5",
                   result.status === "suspect" && "border-amber-500/40 bg-amber-500/5",
                   result.status === "invalid" && "border-red-500/40 bg-red-500/5",
                 )}>
                   <div className="flex items-center gap-2 mb-2">
-                    {result.status === "valid" && <ShieldCheck className="h-4 w-4 text-emerald-600" />}
-                    {result.status === "suspect" && <ShieldAlert className="h-4 w-4 text-amber-600" />}
-                    {result.status === "invalid" && <AlertCircle className="h-4 w-4 text-red-600" />}
+                    {result.status === "valid" && <ShieldCheck className="h-4 w-4 text-emerald-600 animate-float" />}
+                    {result.status === "suspect" && <ShieldAlert className="h-4 w-4 text-amber-600 animate-float" />}
+                    {result.status === "invalid" && <AlertCircle className="h-4 w-4 text-red-600 animate-float" />}
                     <span className="font-medium capitalize">{result.status}</span>
                   </div>
                   {result.matchedRecord ? (
@@ -148,7 +148,15 @@ export default function UploadBox() {
                   )}
                 </div>
               )}
-              {loading && <p className="text-sm text-muted-foreground">Analyzing…</p>}
+              {loading && (
+                <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+                  <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                  </svg>
+                  Analyzing…
+                </div>
+              )}
             </div>
           </div>
         )}
