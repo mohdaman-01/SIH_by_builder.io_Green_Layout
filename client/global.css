@@ -103,6 +103,10 @@
     @apply border-border;
   }
 
+  html { scroll-behavior: smooth; }
+
+  ::selection { @apply bg-emerald-500/30; }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
